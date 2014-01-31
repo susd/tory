@@ -20,12 +20,35 @@
 #
 
 class Device < ActiveRecord::Base
-  
+  mount_uploader :xmlfile, XmlUploader
   def mac_address=(str)
-    write_attribute :_mac_address, str.downcase.gsub(/\:/, '')
+    self._mac_address = str.downcase.gsub(/\:/, '')
   end
   
   def mac_address
     _mac_address.scan(/\w{2}/).join(':').upcase
+  end
+  
+  def load_xml
+    @doc ||= Nokogiri::XML.parse(self.xmlfile.file.read)
+  end
+  
+  def extract_cpu!
+    load_xml
+    self.cpu = @doc.css("node.processor").first.css("product").text
+  end
+  
+  def extract_speed!
+    load_xml
+    mhz = @doc.css("node.processor").first.css("size").first.text.to_i / 10**6
+    self._cpu_speed = mhz
+  end
+  
+  def extract_ram!
+    load_xml
+    # RAM seems to be the first memory node consistently
+    mem = @doc.css('node[id*=memory]').first
+    bytes = mem.css('node[id*=bank] size').inject(0){|sum, s| sum + s.text.to_i}
+    self.ram = "#{bytes.to_f / (2**30)} GB"
   end
 end
