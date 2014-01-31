@@ -36,9 +36,21 @@ class DeviceTest < ActiveSupport::TestCase
         @device._cpu_speed.must_equal 1500
       end
       
-      it "extracts the ram information" do
+      it "extracts the ram size" do
         @device.extract_ram!
         @device.ram.must_equal "2.0 GB"
+      end
+      
+      it "extracts the ram slot information"
+      
+      it "extracts the make" do
+        @device.extract_make!
+        @device.make.must_equal "Acer"
+      end
+      
+      it "extracts the product" do
+        @device.extract_product!
+        @device.product.must_equal "Veriton N2620G ()"
       end
       
     end

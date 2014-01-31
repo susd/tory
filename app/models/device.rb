@@ -51,4 +51,14 @@ class Device < ActiveRecord::Base
     bytes = mem.css('node[id*=bank] size').inject(0){|sum, s| sum + s.text.to_i}
     self.ram = "#{bytes.to_f / (2**30)} GB"
   end
+  
+  def extract_make!
+    load_xml
+    self.make = @doc.css("node.system > vendor").text
+  end
+  
+  def extract_product!
+    load_xml
+    self.product = @doc.css("node.system > product").text
+  end
 end
