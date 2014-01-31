@@ -24,8 +24,9 @@ ActiveRecord::Schema.define(version: 20140131171602) do
     t.string   "serial"
     t.string   "uuid"
     t.string   "ip_addr"
-    t.string   "_mac_address"
-    t.integer  "_cpu_speed"
+    t.string   "mac_address"
+    t.integer  "cpu_speed"
+    t.text     "banks"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

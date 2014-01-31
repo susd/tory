@@ -2,21 +2,22 @@
 #
 # Table name: devices
 #
-#  id           :integer          not null, primary key
-#  site_id      :integer
-#  htmlfile     :string(255)
-#  xmlfile      :string(255)
-#  cpu          :string(255)
-#  ram          :string(255)
-#  make         :string(255)
-#  product      :string(255)
-#  serial       :string(255)
-#  uuid         :string(255)
-#  ip_addr      :string(255)
-#  _mac_address :string(255)
-#  _cpu_speed   :integer
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id          :integer          not null, primary key
+#  site_id     :integer
+#  htmlfile    :string(255)
+#  xmlfile     :string(255)
+#  cpu         :string(255)
+#  ram         :string(255)
+#  make        :string(255)
+#  product     :string(255)
+#  serial      :string(255)
+#  uuid        :string(255)
+#  ip_addr     :string(255)
+#  mac_address :string(255)
+#  cpu_speed   :integer
+#  banks       :text
+#  created_at  :datetime
+#  updated_at  :datetime
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
@@ -29,8 +30,8 @@ one:
   serial: MyString
   uuid: MyString
   ip_addr: MyString
-  _mac_address: MyString
-  _cpu_speed: 1
+  mac_address: MyString
+  cpu_speed: 1
 
 two:
   cpu: MyString
@@ -40,5 +41,5 @@ two:
   serial: MyString
   uuid: MyString
   ip_addr: MyString
-  _mac_address: MyString
-  _cpu_speed: 1
+  mac_address: MyString
+  cpu_speed: 1

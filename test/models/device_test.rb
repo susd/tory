@@ -12,7 +12,7 @@ class DeviceTest < ActiveSupport::TestCase
       it "normalizes mac address" do
         mac = "01:02:03:04:05:06"
         @device.mac_address = mac
-        @device._mac_address.must_equal "010203040506"
+        @device.attributes['mac_address'].must_equal "010203040506"
         @device.mac_address.must_equal mac
       end
     end
@@ -33,7 +33,7 @@ class DeviceTest < ActiveSupport::TestCase
       
       it "extracts the cpu_speed" do
         @device.extract_speed!
-        @device._cpu_speed.must_equal 1500
+        @device.cpu_speed.must_equal 1500
       end
       
       it "extracts the ram size" do
