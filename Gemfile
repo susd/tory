@@ -51,6 +51,7 @@ end
 
 group :test do
   gem 'minitest'
+  gem 'guard-minitest'
   gem 'mocha'
   gem 'minitest-spec-rails', github: 'metaskills/minitest-spec-rails'
 end
