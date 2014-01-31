@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h3><%= @device.best_name %></h3>
+    <div class="meta">
+      <%= @device.site.name %> | 
+      <%= @device.created_at.strftime('%b %e, %Y %l:%m%p ') %>
+    </div>
+    <hr>
+  </div>
+</div>
+  
+<div class="row">
+  <div class="large-3 columns">
+    <ul class="side-nav">
+      <li><%= link_to 'Deploy', 'javascript:;' %></li>
+      <li><%= link_to 'Upload', 'javascript:;' %></li>
+      <li><%= link_to 'Inventory', 'javascript:;' %></li>
+      <% if @device.htmlfile.present? %>
+      <li class="divider"></li>
+      <li><%= link_to 'Populate from XML', parse_device_path(@device), method: :put %></li>
+      <li><%= link_to 'View raw data', @device.htmlfile.url %></li>
+      <% end %>
+      <li class="divider"></li>
+      <li><%= link_to 'Delete', @device, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+    </ul>
+  </div>
+    
+  <div class="large-6 columns">
+      
+    <table>
+      <tr>
+        <td>Manufacturer</td>
+        <td><%= @device.make %></td>
+      </tr>
+      <tr>
+        <td>Product</td>
+        <td><%= @device.product %></td>
+      </tr>
+      <tr>
+        <td>RAM</td>
+        <td><%= @device.ram %></td>
+      </tr>
+      <tr>
+        <td>CPU</td>
+        <td>
+          <%= @device.cpu %><br>
+          <%= @device.cpu_speed %>
+        </td>
+      </tr>
+      <tr>
+        <td>Mac Address</td>
+        <td><%= @device.mac_address %></td>
+      </tr>
+      <tr>
+        <td>UUID</td>
+        <td><%= @device.uuid %></td>
+      </tr>
+    </table>
+      
+      
+    <h4>Memory Configuration</h4>
+    <ul>
+      <% @device.banks.each do |bank| %>
+      <li><strong>Bank <%= bank.position %>:</strong> <%= bank.size %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="large-3 columns">
+    <div>
+      <h5>History</h5>
+      <p>Deploy | Dec 11, 2013 4:00pm</p>
+    </div>
+  </div>
+    
+</div>
