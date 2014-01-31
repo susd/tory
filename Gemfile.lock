@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/metaskills/minitest-spec-rails.git
+  revision: 3780f8f512cb6918e0c3447a460591c04d74e840
+  specs:
+    minitest-spec-rails (5.0.2)
+      minitest (~> 5.0)
+      rails (>= 4.1.0.beta, < 5.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -27,6 +35,9 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    annotate (2.6.1)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
     arel (5.0.0)
     atomic (1.1.14)
     builder (3.2.2)
@@ -166,6 +177,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate
   capistrano-bundler
   capistrano-rails
   carrierwave
@@ -174,6 +186,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   minitest
+  minitest-spec-rails!
   mocha
   nokogiri
   pry-rails

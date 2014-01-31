@@ -46,11 +46,13 @@ group :development do
   gem 'spring'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
+  gem 'annotate'
 end
 
 group :test do
   gem 'minitest'
   gem 'mocha'
+  gem 'minitest-spec-rails', github: 'metaskills/minitest-spec-rails'
 end
 
 group :development, :test do
