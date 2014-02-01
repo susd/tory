@@ -22,6 +22,7 @@
 
 class Device < ActiveRecord::Base
   mount_uploader :xmlfile, XmlUploader
+  store :banks, coder: JSON
   def mac_address=(str)
     super(str.downcase.gsub(/\:/, ''))
   end
@@ -50,7 +51,21 @@ class Device < ActiveRecord::Base
     # RAM seems to be the first memory node consistently
     mem = @doc.css('node[id*=memory]').first
     bytes = mem.css('node[id*=bank] size').inject(0){|sum, s| sum + s.text.to_i}
-    self.ram = "#{bytes.to_f / (2**30)} GB"
+    self.ram = bytes_to_giga(bytes)
+  end
+  
+  def extract_banks!
+    load_xml
+    mem = @doc.css('node[id*=memory]').first # RAM seems to be the first memory node consistently
+    mem.css('node[id*=bank]').each do |bank|
+      pos = bank.attr('id').gsub(/\D/, '')
+      bytes = bank.css('size').text.to_i
+      if bytes > 0
+        banks[pos] = { id: bank.attr('id'), size: bytes_to_giga(bytes) }
+      else
+        banks[pos] = 'empty'
+      end
+    end
   end
   
   def extract_make!
@@ -62,4 +77,30 @@ class Device < ActiveRecord::Base
     load_xml
     self.product = @doc.css("node.system > product").text
   end
+  
+  def extract_serial!
+    load_xml
+    self.serial = @doc.css("node.system > serial").text
+  end
+  
+  def extract_uuid!
+    load_xml
+    self.uuid = @doc.css('setting#uuid').attr('value').text
+  end
+  
+  state_machine :state, initial: :active do
+    event :retire do
+      transition :active => :retired
+    end
+    event :unretire do
+      transition :retired => :active
+    end
+  end
+  
+  private
+  
+  def bytes_to_giga(bytes)
+    "#{bytes.to_f / (2**30)} GB"
+  end
+  
 end

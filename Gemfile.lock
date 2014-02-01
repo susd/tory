@@ -6,6 +6,11 @@ GIT
       minitest (~> 5.0)
       rails (>= 4.1.0.beta, < 5.0)
 
+PATH
+  remote: ~/code/github/state_machine
+  specs:
+    state_machine (1.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -172,7 +177,6 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh
       term-ansicolor
-    state_machine (1.2.0)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
     therubyracer (0.12.0)
@@ -220,7 +224,7 @@ DEPENDENCIES
   sdoc
   spring
   sqlite3
-  state_machine
+  state_machine!
   therubyracer
   turbolinks
   uglifier (>= 1.3.0)

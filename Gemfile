@@ -38,7 +38,7 @@ gem 'foundation-rails'
 
 gem 'carrierwave'
 
-gem 'state_machine'
+gem 'state_machine', path: '~/code/github/state_machine'
 
 gem 'rest-client'
 

@@ -4,8 +4,6 @@ class DeviceTest < ActiveSupport::TestCase
   describe Device do
     setup do
       @device = Device.new
-      
-      # @test_html = File.open(File.expand_path('test/fixtures/n2620G.html', Rails.root))
     end
     
     describe "Formatting attributes" do
@@ -41,7 +39,12 @@ class DeviceTest < ActiveSupport::TestCase
         @device.ram.must_equal "2.0 GB"
       end
       
-      it "extracts the ram slot information"
+      it "extracts the memory bank information" do
+        @device.extract_banks!
+        @device.save
+        @device.reload
+        @device.banks.must_equal({'0' => {'id' => 'bank:0', 'size' => '2.0 GB'}, '1' => 'empty' })
+      end
       
       it "extracts the make" do
         @device.extract_make!
@@ -53,6 +56,23 @@ class DeviceTest < ActiveSupport::TestCase
         @device.product.must_equal "Veriton N2620G ()"
       end
       
+      it "extracts the serial" do
+        @device.extract_serial!
+        @device.serial.must_equal "DTVFGAA002252057D49200"
+      end
+      
+      it "extracts the uuid" do
+        @device.extract_uuid!
+        @device.uuid.must_equal "D02788DD-EB2D-2012-1227-152554000000"
+      end
+      
+    end
+    
+    describe "Device states" do
+      it "Can be retired" do
+        @device.retire
+        assert @device.retired?
+      end
     end
   end
 end
