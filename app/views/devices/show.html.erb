@@ -10,7 +10,7 @@
 </div>
   
 <div class="row">
-  <div class="large-3 columns">
+  <div class="medium-3 columns">
     <ul class="side-nav">
       <li><%= link_to 'Deploy', 'javascript:;' %></li>
       <li><%= link_to 'Upload', 'javascript:;' %></li>
@@ -25,8 +25,8 @@
     </ul>
   </div>
     
-  <div class="large-6 columns">
-      
+  <div class="medium-9 columns">
+    
     <table>
       <tr>
         <td>Manufacturer</td>
@@ -43,8 +43,8 @@
       <tr>
         <td>CPU</td>
         <td>
-          <%= @device.cpu %><br>
-          <%= @device.cpu_speed %>
+          <%= @device.cpu %> 
+          <%= @device.cpu_speed %> Mhz
         </td>
       </tr>
       <tr>
@@ -56,20 +56,14 @@
         <td><%= @device.uuid %></td>
       </tr>
     </table>
-      
-      
+    
+    
     <h4>Memory Configuration</h4>
     <ul>
       <% @device.banks.each do |pos, bank| %>
       <li><strong><%= bank['id'] %></strong> = <%= bank['size'] %></li>
       <% end %>
     </ul>
-  </div>
-  <div class="large-3 columns">
-    <div>
-      <h5>History</h5>
-      
-    </div>
   </div>
     
 </div>

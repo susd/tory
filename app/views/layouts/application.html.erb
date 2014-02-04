@@ -7,8 +7,32 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  
+  <% if flash.any? %>
+  <div class="messages">
+    <% flash.each do |k,v| %>
+    <div class="radius alert-box <%= k %>">
+      <%= v %>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+  
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="fixed contain-to-grid">
+        <nav class="top-bar" data-topbar data-options="is_hover: false">
+          <section class="top-bar-section">
+            <ul class="left">
+              <li><%= link_to 'Devices', devices_path %></li>
+            </ul>
+          </section>
+        </nav>
+      </div>
+    </div>
+  </div>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>

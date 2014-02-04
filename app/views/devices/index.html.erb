@@ -7,23 +7,19 @@
           <th>Site</th>
           <th>Make</th>
           <th>Model</th>
+          <th>Serial</th>
           <th>Mac Address</th>
-          <th>Ops</th>
         </tr>
       </thead>
 
       <tbody>
         <% @devices.each do |device| %>
-          <tr>
+          <tr class="clickable" href="<%= device_path(device) %>">
             <td><%= device.site.abbr.upcase %></td>
             <td><%= device.make %></td>
             <td><%= device.product %></td>
+            <td><%= device.serial %></td>
             <td><%= device.mac_address %></td>
-            <td>
-              <ul class="button-group" style="margin:0">
-                <li><%= link_to 'view', device, class: 'tiny button' %></li>
-              </ul>
-            </td>
           </tr>
         <% end %>
       </tbody>

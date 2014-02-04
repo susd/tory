@@ -1,5 +1,14 @@
 @import 'foundation';
 
+$highlight: mix(lighten(#ff0, 40%), #f00, 95%);
+
 td .button-group .button{
   margin: 0;
+}
+
+.clickable{
+  &:hover{
+    cursor: pointer;
+    background-color: $highlight;
+  }
 }
