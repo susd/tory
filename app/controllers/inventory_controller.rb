@@ -1,8 +1,9 @@
 class InventoryController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: :create
   
   def index
     if params[:mac_address]
-      @devices = Device.where(_mac_address: normalize_mac(params[:mac_address]))
+      @devices = Device.where(mac_address: normalize_mac(params[:mac_address]))
     else
       @devices = []
     end
@@ -12,7 +13,7 @@ class InventoryController < ApplicationController
   end
   
   def create
-    @device = Device.where(_mac_address: normalize_mac(inventory_params[:mac_address])).first_or_initialize
+    @device = Device.where(mac_address: normalize_mac(inventory_params[:mac_address])).first_or_initialize
     @device.site = Site.find_by(code: site_code_from_ip(inventory_params[:device][:ip_addr]))
     respond_to do |format|
       if @device.update(inventory_params[:device])

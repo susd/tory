@@ -22,13 +22,21 @@
 
 class Device < ActiveRecord::Base
   mount_uploader :xmlfile, XmlUploader
+  mount_uploader :htmlfile, HtmlUploader
+  
   store :banks, coder: JSON
+  
+  belongs_to :site
+  
+  validates :mac_address, presence: true, uniqueness: true
+  validates :site_id, presence: true
+  
   def mac_address=(str)
     super(str.downcase.gsub(/\:/, ''))
   end
   
   def mac_address
-    super.scan(/\w{2}/).join(':').upcase
+    super.scan(/\w{2}/).join(':').upcase if super
   end
   
   def load_xml
@@ -86,6 +94,27 @@ class Device < ActiveRecord::Base
   def extract_uuid!
     load_xml
     self.uuid = @doc.css('setting#uuid').attr('value').text
+  end
+  
+  def extract_from_xml!
+    extract_cpu!
+    extract_speed!
+    extract_ram!
+    extract_banks!
+    extract_make!
+    extract_product!
+    extract_serial!
+    extract_uuid!
+  end
+  
+  def best_name
+    if serial && !serial.blank?
+      serial
+    elsif mac_address && mac_address != "00"*6
+      mac_address
+    else
+      uuid
+    end
   end
   
   state_machine :state, initial: :active do

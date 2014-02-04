@@ -15,15 +15,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  abbr: MyString
-  pxe: MyString
-  storage: MyString
-  code: 1
+  name: Cedarcreek
+  abbr: CC
+  pxe: 10.10.1.4
+  storage: 10.10.1.4
+  code: 10
 
 two:
-  name: MyString
-  abbr: MyString
-  pxe: MyString
-  storage: MyString
-  code: 1
+  name: Bridgeport
+  abbr: BP
+  pxe: 10.75.1.4
+  storage: 10.75.1.4
+  code: 75

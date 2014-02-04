@@ -60,15 +60,15 @@
       
     <h4>Memory Configuration</h4>
     <ul>
-      <% @device.banks.each do |bank| %>
-      <li><strong>Bank <%= bank.position %>:</strong> <%= bank.size %></li>
+      <% @device.banks.each do |pos, bank| %>
+      <li><strong><%= bank['id'] %></strong> = <%= bank['size'] %></li>
       <% end %>
     </ul>
   </div>
   <div class="large-3 columns">
     <div>
       <h5>History</h5>
-      <p>Deploy | Dec 11, 2013 4:00pm</p>
+      
     </div>
   </div>
     

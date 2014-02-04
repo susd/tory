@@ -4,7 +4,7 @@ class DevicesController < ApplicationController
   # GET /devices
   # GET /devices.json
   def index
-    @devices = Device.desc(:created_at)
+    @devices = Device.order(created_at: :desc)
   end
 
   # GET /devices/1
@@ -51,7 +51,7 @@ class DevicesController < ApplicationController
       end
     end
   end
-
+  
   # DELETE /devices/1
   # DELETE /devices/1.json
   def destroy
@@ -63,7 +63,7 @@ class DevicesController < ApplicationController
   end
   
   def parse
-    @device.extract_from_xml
+    @device.extract_from_xml!
     @device.save
     redirect_to @device
   end
@@ -76,6 +76,6 @@ class DevicesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def device_params
-    params.require(:device).permit(:xmldata, :xmlfile, :htmlfile)
+    params.require(:device).permit(:mac_address, :site, :site_id, :xmlfile, :htmlfile)
   end
 end

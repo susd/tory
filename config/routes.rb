@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :devices do
+    put :parse, on: :member
+  end
+  
+  resources :inventory, only: [:index,:create]
+  
+  root to: 'devices#index'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
