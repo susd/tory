@@ -54,6 +54,8 @@ group :test do
   gem 'guard-minitest'
   gem 'mocha'
   gem 'minitest-spec-rails', github: 'metaskills/minitest-spec-rails'
+  gem 'webmock'
+  gem 'vcr'
 end
 
 group :development, :test do
