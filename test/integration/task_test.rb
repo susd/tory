@@ -4,16 +4,23 @@ class TaskTest < ActionDispatch::IntegrationTest
   
   before do
     @device = devices(:one)
-    VCR.insert_cassette 'tasks', :record => :new_episodes
+    @ts = TaskScheduler.new(@device)
   end
   
-  after do
-    VCR.eject_cassette
+  describe "checking for running task" do
+    
+    it "returns 'no task' when none exist" do
+      stub_request(:get, "http://10.10.1.4/check/00:11:22:33:44:55").
+        to_return(status: 200, body: 'no task for that address'.to_json)
+      TaskServer.check(@device).must_equal 'no task for that address'.to_json
+    end
+    
   end
   
-  it "schedules a task" do
-    post tasks_path, {device: @device}
-    assert_response :success
+  describe "scheduling a task" do
+    it "schedules a deploy task"
   end
+  
+  
   
 end

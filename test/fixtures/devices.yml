@@ -30,7 +30,7 @@ one:
   serial: MyString
   uuid: MyString
   ip_addr: MyString
-  mac_address: 010203040506
+  mac_address: '001122334455'
   cpu_speed: 1
   site: one
   state: active
@@ -43,6 +43,6 @@ two:
   serial: MyString
   uuid: MyString
   ip_addr: MyString
-  mac_address: 020304050607
+  mac_address: '020304050607'
   cpu_speed: 1
   site: two

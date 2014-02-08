@@ -4,13 +4,15 @@ require 'rails/test_help'
 require "minitest/pride"
 require 'mocha/mini_test'
 require 'webmock/minitest'
-require 'vcr'
+# require 'vcr'
+# 
+# VCR.configure do |c|
+#   c.cassette_library_dir = 'spec/fixtures/dish_cassettes'
+#   c.hook_into :webmock
+#   c.debug_logger
+# end
 
-VCR.configure do |c|
-  c.cassette_library_dir = 'spec/fixtures/dish_cassettes'
-  c.hook_into :webmock
-  c.debug_logger
-end
+WebMock.disable_net_connect!(allow_localhost: true)
 
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
