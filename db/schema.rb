@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140210191556) do
+ActiveRecord::Schema.define(version: 20140210221852) do
 
   create_table "devices", force: true do |t|
     t.integer  "site_id"
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(version: 20140210191556) do
   end
 
   add_index "devices", ["site_id"], name: "index_devices_on_site_id"
+
+  create_table "images", force: true do |t|
+    t.string   "name"
+    t.text     "desc"
+    t.string   "file"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sites", force: true do |t|
     t.string   "name"

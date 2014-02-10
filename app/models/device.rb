@@ -28,6 +28,7 @@ class Device < ActiveRecord::Base
   store :banks, coder: JSON
   
   belongs_to :site
+  has_many :tasks
   
   validates :mac_address, presence: true, uniqueness: true
   validates :site_id, presence: true
@@ -116,6 +117,10 @@ class Device < ActiveRecord::Base
     else
       uuid
     end
+  end
+  
+  def has_image?
+    image_id.present?
   end
   
   state_machine :state, initial: :active do

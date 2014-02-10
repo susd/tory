@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :images
+
   resources :devices do
     put :parse, on: :member
   end
