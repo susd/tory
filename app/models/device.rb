@@ -4,6 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  site_id     :integer
+#  image_id    :integer
 #  htmlfile    :string(255)
 #  xmlfile     :string(255)
 #  cpu         :string(255)
@@ -28,6 +29,7 @@ class Device < ActiveRecord::Base
   store :banks, coder: JSON
   
   belongs_to :site
+  belongs_to :image
   has_many :tasks
   
   validates :mac_address, presence: true, uniqueness: true
