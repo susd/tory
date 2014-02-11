@@ -11,7 +11,7 @@
   <% if flash.any? %>
   <div class="messages">
     <% flash.each do |k,v| %>
-    <div class="radius alert-box <%= k %>">
+    <div class="alert-box <%= k %>">
       <%= v %>
     </div>
     <% end %>
@@ -25,6 +25,7 @@
           <section class="top-bar-section">
             <ul class="left">
               <li><%= link_to 'Devices', devices_path %></li>
+              <li><%= link_to 'Images', images_path %></li>
             </ul>
           </section>
         </nav>

@@ -11,6 +11,7 @@
   
 <div class="row">
   <div class="medium-3 columns">
+    
     <ul class="side-nav">
       <li><%= link_to 'Deploy', 'javascript:;' %></li>
       <li><%= link_to 'Upload', 'javascript:;' %></li>
@@ -23,6 +24,19 @@
       <li class="divider"></li>
       <li><%= link_to 'Delete', @device, method: :delete, data: { confirm: 'Are you sure?' } %></li>
     </ul>
+    
+    <hr>
+    
+    <%= form_for @device do |f| %>
+      <div class="field">
+        <%= f.label :image_id %>
+        <%= f.select :image_id, @image_map %>
+      </div>
+      <div class="actions">
+        <%= f.submit 'update', class: 'button' %>
+      </div>
+    <% end %>
+    
   </div>
     
   <div class="medium-9 columns">

@@ -10,6 +10,7 @@ class DevicesController < ApplicationController
   # GET /devices/1
   # GET /devices/1.json
   def show
+    @image_map = Image.all.pluck(:name, :id)
   end
 
   # GET /devices/new
@@ -76,6 +77,6 @@ class DevicesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def device_params
-    params.require(:device).permit(:mac_address, :site, :site_id, :xmlfile, :htmlfile)
+    params.require(:device).permit(:mac_address, :site_id, :image_id, :xmlfile, :htmlfile)
   end
 end
