@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140210221852) do
-
+ActiveRecord::Schema.define(version: 20140211000219) do
+  
   create_table "devices", force: true do |t|
     t.integer  "site_id"
+    t.integer  "image_id"
     t.string   "htmlfile"
     t.string   "xmlfile"
     t.string   "cpu"
@@ -31,8 +32,9 @@ ActiveRecord::Schema.define(version: 20140210221852) do
     t.datetime "updated_at"
     t.string   "state"
   end
-
+  
   add_index "devices", ["site_id"], name: "index_devices_on_site_id"
+  add_index "devices", ["image_id"], name: "index_devices_on_image_id"
 
   create_table "images", force: true do |t|
     t.string   "name"
@@ -59,5 +61,7 @@ ActiveRecord::Schema.define(version: 20140210221852) do
     t.string   "state"
     t.string   "job"
   end
+  
+  add_index "tasks", ["device_id"], name: "index_tasks_on_device_id"
 
 end
