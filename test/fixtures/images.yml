@@ -13,9 +13,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: my-image-name
   desc: MyText
-  file: MyString
+  file: my-image-file
 
 two:
   name: MyString

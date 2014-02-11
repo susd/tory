@@ -36,6 +36,7 @@ one:
   cpu_speed: 1
   site: one
   state: active
+  image: one
 
 two:
   cpu: MyString
@@ -48,3 +49,8 @@ two:
   mac_address: '020304050607'
   cpu_speed: 1
   site: two
+  
+three:
+  mac_address: aa30b3cc728f
+  site: one
+  image: one

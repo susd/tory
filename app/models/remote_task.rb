@@ -9,7 +9,7 @@ class RemoteTask
   
   def exists?
     begin
-      resp = JSON.parse check
+      resp = check
       return resp[:message] == 'active task'
     rescue RestClient::ResourceNotFound
       return false
@@ -17,7 +17,7 @@ class RemoteTask
   end
   
   def check
-    @resource["/check/#{@device.mac_address}"].get
+    parse @resource["/check/#{@device.mac_address}"].get
   end
   
   def schedule(job)
@@ -25,6 +25,17 @@ class RemoteTask
       mac_address: @device.mac_address,
       image: @device.image.name
     }
-    @resource[job].post data
+    resp = @resource[job].post data
+    parse resp
+  end
+  
+  def delete
+    parse @resource["/finished/#{@device.mac_address}"].delete
+  end
+  
+  private
+  
+  def parse(resp)
+    JSON.parse(resp).symbolize_keys
   end
 end

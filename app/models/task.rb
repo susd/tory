@@ -13,7 +13,8 @@
 class Task < ActiveRecord::Base
   belongs_to :device
   validates_with ActiveTaskValidator
-  validate :device_has_image
+  validates :device_id, presence: true
+  validate :device_has_image?
   
   def device_has_image?
     errors.add(:base, 'Device has no image assigned.') unless device.has_image?

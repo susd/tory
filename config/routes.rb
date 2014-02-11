@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   
   resources :inventory, only: [:index,:create]
   
+  resources :tasks, except: [:new, :edit]
+  
   root to: 'devices#index'
   
   # The priority is based upon order of creation: first created -> highest priority.
