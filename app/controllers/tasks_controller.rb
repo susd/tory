@@ -37,7 +37,8 @@ class TasksController < ApplicationController
     if @task.active?
       resp = delete_remote_task(@task)
       if resp[:message] == 'task deleted'
-        @task.cancel!
+        @task.cancel!(false) # => transition but don't save (validations)
+        @task.save
         status_and_flash = { notice: 'Task cancelled' }
       else
         status_and_flash = { alert: 'Task could not be delete remotely' }

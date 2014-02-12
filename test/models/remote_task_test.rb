@@ -34,6 +34,7 @@ describe RemoteTask do
   end
   
   it 'deletes jobs' do
+    stub_delete_request(@device.site.pxe, @device.mac_address)
     resp = @rt.delete
     resp.must_equal({message: 'task deleted'})
   end
