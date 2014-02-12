@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   
   resources :tasks, except: [:new, :edit]
   
+  resources :sites, only: [:index, :edit, :update]
+  
   root to: 'devices#index'
   
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="medium12 columns">
+    <h1>Listing Sites</h1>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Abbr</th>
+          <th>Name</th>
+          <th>PXE</th>
+          <th>Storage</th>
+          <th></th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <% @sites.each do |site| %>
+          <tr>
+            <td><%= site.code %></td>
+            <td><%= site.abbr.upcase %></td>
+            <td><%= site.name %></td>
+            <td><%= site.pxe %></td>
+            <td><%= site.storage %></td>
+            <td><%= link_to 'Edit', edit_site_path(site) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
