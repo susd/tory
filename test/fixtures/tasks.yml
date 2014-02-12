@@ -24,4 +24,5 @@ deploy:
 upload:
   device: two
   job: upload
+  state: completed
 

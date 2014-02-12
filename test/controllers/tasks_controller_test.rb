@@ -3,10 +3,7 @@ require 'test_helper'
 describe TasksController do
   before do
     @task = tasks(:deploy)
-  end
-  
-  after do
-    Task.destroy_all
+    @site = Site.last
   end
   
   it 'gets the index' do
@@ -16,14 +13,18 @@ describe TasksController do
   end
   
   it 'should create a new task' do
-    stub_check_request(devices(:three).site.pxe, devices(:three).mac_address)
-    stub_schedule_request(devices(:three).site.pxe, devices(:three).mac_address)
+    new_device = Device.create({
+      mac_address: SecureRandom.hex(6), 
+      site: @site, image: images(:one)
+    })
+    stub_check_request(@site.pxe, new_device.mac_address)
+    stub_schedule_request(@site.pxe, new_device.mac_address)
     
-    assert_difference('Task.count') do
-      post :create, task: { device_id: devices(:three).id, job: 'deploy' }
+    assert_difference(->{Task.count}) do
+      post :create, task: { device_id: new_device.id, job: 'deploy' }
     end
-
-    assert_redirected_to device_path(devices(:three).id)
+    
+    assert_redirected_to device_path(new_device.id)
   end
   
   it 'shows the task' do
@@ -32,10 +33,10 @@ describe TasksController do
   end
   
   it "destroys the task" do
-    stub_delete_request
+    stub_delete_request(@site.pxe)
     delete :destroy, id: @task
     assigns(:task).state.must_equal 'cancelled'
-
+  
     assert_redirected_to device_path(@task.device_id)
   end
   
@@ -68,7 +69,7 @@ describe TasksController do
     stub_request(:post, "http://#{pxe}/#{job}").with(req).to_return(expected)
   end
   
-  def stub_delete_request
+  def stub_delete_request(pxe)
     req = {
       headers: request_headers
     }
@@ -77,7 +78,7 @@ describe TasksController do
       body: {message: 'task deleted'}.to_json,
       headers: {}
     }
-    stub_request(:delete, "http://10.10.1.4/finished/#{@task.device.mac_address}").with(req).to_return(expected)
+    stub_request(:delete, "http://#{pxe}/finished/#{@task.device.mac_address}").with(req).to_return(expected)
   end
   
 end
