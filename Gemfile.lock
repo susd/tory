@@ -120,6 +120,7 @@ GEM
     net-ssh (2.7.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    pg (0.17.1)
     polyglot (0.3.3)
     pry (0.9.12.6)
       coderay (~> 1.0)
@@ -224,6 +225,7 @@ DEPENDENCIES
   minitest-spec-rails!
   mocha
   nokogiri
+  pg
   pry-rails
   puma
   rails (= 4.1.0.beta1)
