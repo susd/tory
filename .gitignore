@@ -18,7 +18,7 @@
 .DS_Store
 config/secrets.yml
 config/database.yml
-conifg/deploy.rb
+config/deploy.rb
 config/deploy
 
 # Ignore file uploads
