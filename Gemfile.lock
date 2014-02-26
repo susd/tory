@@ -1,15 +1,17 @@
 GIT
+  remote: git://github.com/hayesr/state_machine.git
+  revision: 529013ccc3e16f6ba1ce1d7f9e9a9de2d02209eb
+  branch: move_around_validation
+  specs:
+    state_machine (1.2.0)
+
+GIT
   remote: git://github.com/metaskills/minitest-spec-rails.git
   revision: 3780f8f512cb6918e0c3447a460591c04d74e840
   specs:
     minitest-spec-rails (5.0.2)
       minitest (~> 5.0)
       rails (>= 4.1.0.beta, < 5.0)
-
-PATH
-  remote: ~/code/github/state_machine
-  specs:
-    state_machine (1.2.0)
 
 GEM
   remote: https://rubygems.org/

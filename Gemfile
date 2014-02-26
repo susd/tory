@@ -39,7 +39,7 @@ gem 'foundation-rails'
 
 gem 'carrierwave'
 
-gem 'state_machine', path: '~/code/github/state_machine'
+gem 'state_machine', github: 'hayesr/state_machine', branch: 'move_around_validation'
 
 gem 'rest-client'
 
