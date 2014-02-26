@@ -10,6 +10,7 @@ class DevicesController < ApplicationController
   # GET /devices/1
   # GET /devices/1.json
   def show
+    @tasks = @device.tasks.order(created_at: :desc)
     @image_map = Image.all.pluck(:name, :id)
   end
 

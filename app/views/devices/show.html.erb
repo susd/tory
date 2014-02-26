@@ -39,7 +39,7 @@
     
   </div>
     
-  <div class="medium-9 columns">
+  <div class="medium-6 columns">
     
     <table>
       <tr>
@@ -78,6 +78,30 @@
       <li><strong><%= bank['id'] %></strong> = <%= bank['size'] %></li>
       <% end %>
     </ul>
+  </div>
+  
+  <div class="medium-3 columns">
+    
+    <h3>Task history</h3>
+    
+    <% if @tasks.any? %>
+    
+    <ul class="task-history">
+      <% @tasks.each do |task| %>
+      <li class="task">
+        <b class="task-job"><%= task.job %></b><br>
+        <span class="task-time"><%= task.updated_at.to_s(:short) %></span>
+        <span class="task-state task-<%= task.state %>"><%= task.state %></span>
+      </li>
+      <% end %>
+    </ul>
+    
+    <% else %>
+    
+    <p>No task history yet.</p>
+    
+    <% end %>
+    
   </div>
     
 </div>
