@@ -13,6 +13,13 @@ GIT
       minitest (~> 5.0)
       rails (>= 4.1.0.beta, < 5.0)
 
+GIT
+  remote: git://github.com/seuros/capistrano-puma.git
+  revision: 77f6fc52ac3a55fb41215d3d38895a305f20ab49
+  specs:
+    capistrano-puma (0.3.0)
+      capistrano (~> 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -216,6 +223,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   capistrano-bundler
+  capistrano-puma!
   capistrano-rails
   carrierwave
   coffee-rails (~> 4.0.0)

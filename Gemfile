@@ -47,6 +47,7 @@ group :development do
   gem 'spring'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
+  gem 'capistrano-puma', github: "seuros/capistrano-puma"
   gem 'annotate'
 end
 
