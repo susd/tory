@@ -9,27 +9,27 @@ class TasksController < ApplicationController
   
   def create
     @task = Task.new(task_params)
-    
-    if @task.valid?
-      @remote = RemoteTask.new(@task.device)
-      if @remote.exists?
-        @task.errors.add :base, 'PXE task already exists'
-      else
-        status = @remote.schedule(task.job)
-        unless status[:message] == 'active task'
-          @task.errors.add :base, 'Could not schedule remote job'
-        end
-      end
-    end
-    
+    @remote = create_remote_task(@task)
+    failure = false
     respond_to do |format|
-      if @task.save
-        handle_create_success(format)
+      if @remote.exists?
+        unless @task.save
+          @failure = true
+          status = { alert: 'Task could not be created.' }
+        end
       else
-        handle_create_failure(format)
+        @failure = true
+        status = { alert: 'Remote task could not be schduled.' }
+      end
+      
+      if @failure
+        format.html { redirect_to @task.device, status }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      else
+        format.html { redirect_to @task.device, notice: 'Task scheduled.' }
+        format.json { render text: 'success', status: :created, location: @task.device }
       end
     end
-    
   end
   
   def destroy
@@ -38,10 +38,11 @@ class TasksController < ApplicationController
       resp = delete_remote_task(@task)
       if resp[:message] == 'task deleted'
         @task.cancel!(false) # => transition but don't save (validations)
-        @task.save
+        @task.save(validate: false)
         status_and_flash = { notice: 'Task cancelled' }
       else
-        status_and_flash = { alert: 'Task could not be delete remotely' }
+        #TODO: Send more specific error to user if one exists.
+        status_and_flash = { alert: 'Task could not be deleted remotely' }
       end
     else
       # TODO delete remote task if one exists
@@ -52,6 +53,13 @@ class TasksController < ApplicationController
   end
   
   private
+  
+  def create_remote_task(task)
+    #TODO: looks like RemoteTask should just be instantiated with a task
+    remote = RemoteTask.new(task.device)
+    remote.schedule(task.job)
+    remote
+  end
   
   def delete_remote_task(task)
     @remote = RemoteTask.new(task.device)

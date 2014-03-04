@@ -43,6 +43,10 @@ class Device < ActiveRecord::Base
     super.scan(/\w{2}/).join(':').upcase if super
   end
   
+  def active_task?
+    !!tasks.where(state: 'active').any?
+  end
+  
   def load_xml
     @doc ||= Nokogiri::XML.parse(self.xmlfile.file.read)
   end

@@ -12,8 +12,21 @@
 <div class="row">
   <div class="medium-3 columns">
     
-    <%= link_to 'Deploy', 'javascript:;', class: 'expand button' %>
-    <%= link_to 'Upload', 'javascript:;', class: 'expand button' %>
+    <%# link_to 'Deploy', 'javascript:;', class: 'expand button' %>
+    <%# task_button(@device, 'deploy') %>
+    <%# task_button(@device, 'upload') %>
+    <% if @device.active_task? %>
+    
+    <div class="panel">
+      <p>Currently waiting for <%= @device.tasks.find_by(state: 'active').job %> to complete.</p>
+    </div>
+    
+    <% else %>
+    
+    <%= render partial: 'create_task', locals: {device_id: @device.id, job: 'deploy'} %>
+    <%= render partial: 'create_task', locals: {device_id: @device.id, job: 'upload'} %>
+    
+    <% end %>
     
     <ul class="side-nav">
       <% if @device.htmlfile.present? %>
@@ -92,6 +105,9 @@
         <b class="task-job"><%= task.job %></b><br>
         <span class="task-time"><%= task.updated_at.to_s(:short) %></span>
         <span class="task-state task-<%= task.state %>"><%= task.state %></span>
+        <% if task.active? %>
+        <span class="task-cancel"><%= link_to_cancel(task) %></span>
+        <% end %>
       </li>
       <% end %>
     </ul>

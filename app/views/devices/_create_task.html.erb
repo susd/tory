@@ -1,0 +1,5 @@
+<%= form_for Task.new do |f| %>
+  <%= f.hidden_field :device_id, {value: device_id} %>
+  <%= f.hidden_field :job, {value: job} %>
+  <%= f.submit job.titleize, class: 'expand button' %>
+<% end %>
