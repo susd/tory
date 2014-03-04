@@ -57,7 +57,7 @@ class ActiveSupport::TestCase
   def stub_check_request(pxe, mac)
     expected = {
       status: 200,
-      body: {message: 'active task'}.to_json,
+      body: {message: 'task active'}.to_json,
       headers: {}
     }
     stub_request(:get, "http://#{pxe}/check/#{mac}").

@@ -9,9 +9,9 @@ class SitesController < ApplicationController
   
   def update
     if @site.update(site_params)
-      format.html { redirect_to sites_path, notice: 'Site was successfully updated.' }
+      redirect_to sites_path, notice: 'Site was successfully updated.'
     else
-      format.html { render action: 'edit' }
+      render action: 'edit'
     end
   end
   
