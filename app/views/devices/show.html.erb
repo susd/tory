@@ -12,10 +12,13 @@
 <div class="row">
   <div class="medium-3 columns">
     
-    <%# link_to 'Deploy', 'javascript:;', class: 'expand button' %>
-    <%# task_button(@device, 'deploy') %>
-    <%# task_button(@device, 'upload') %>
-    <% if @device.active_task? %>
+    <% if @device.image.nil? %>
+    
+    <div class="panel">
+      Associate an image with this device.
+    </div>
+    
+    <% elsif @device.active_task? %>
     
     <div class="panel">
       <p>Currently waiting for <%= @device.tasks.find_by(state: 'active').job %> to complete.</p>
@@ -26,6 +29,16 @@
     <%= render partial: 'create_task', locals: {device_id: @device.id, job: 'deploy'} %>
     <%= render partial: 'create_task', locals: {device_id: @device.id, job: 'upload'} %>
     
+    <% end %>
+    
+    <%= form_for @device do |f| %>
+      <div class="field">
+        <%= f.label :image_id %>
+        <%= f.select :image_id, @image_map %>
+      </div>
+      <div class="actions">
+        <%= f.submit 'update', class: 'button' %>
+      </div>
     <% end %>
     
     <ul class="side-nav">
@@ -40,15 +53,7 @@
     
     <hr>
     
-    <%= form_for @device do |f| %>
-      <div class="field">
-        <%= f.label :image_id %>
-        <%= f.select :image_id, @image_map %>
-      </div>
-      <div class="actions">
-        <%= f.submit 'update', class: 'button' %>
-      </div>
-    <% end %>
+
     
   </div>
     
