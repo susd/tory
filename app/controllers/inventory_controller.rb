@@ -32,10 +32,6 @@ class InventoryController < ApplicationController
     params.permit(:mac_address, :format, device: [:xmlfile, :htmlfile, :ip_addr])
   end
   
-  def normalize_mac(str)
-    str.gsub(/\:/,'').downcase.chomp
-  end
-  
   def site_code_from_ip(ip_addr)
     unless ip_addr.nil?
       code = ip_addr.split('.')[1].to_i

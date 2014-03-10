@@ -52,6 +52,22 @@ class TasksController < ApplicationController
     redirect_to @task.device, status_and_flash
   end
   
+  def finish
+    load_task_from_mac(params[:mac])
+    if @task && @task.active?
+      resp = delete_remote_task(@task)
+      if resp[:message] == 'task deleted'
+        @task.finish!(false) # => transition but don't save (validations)
+        @task.save(validate: false)
+        message = 'Task marked finished'
+      end
+    else
+      message = 'no active task'
+    end
+    
+    render text: message
+  end
+  
   private
   
   def create_remote_task(task)
@@ -83,4 +99,10 @@ class TasksController < ApplicationController
   def load_task
     @task = Task.find(params[:id])
   end
+  
+  def load_task_from_mac(mac)
+    @task = Device.find_by(mac_address: normalize_mac(mac)).tasks.find_by(state: 'active')
+  end
+  
+  
 end

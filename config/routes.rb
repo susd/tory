@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   
   resources :inventory, only: [:index,:create]
   
-  resources :tasks, except: [:new, :edit]
+  resources :tasks, except: [:new, :edit] 
+  get 'tasks/:mac/finish', to: 'tasks#finish', as: :finish_task
   
   resources :sites, only: [:index, :edit, :update]
   

@@ -40,4 +40,10 @@ describe TasksController do
     assert_redirected_to device_path(@task.device_id)
   end
   
+  it "finishes the task" do
+    stub_delete_request(@site.pxe, @task.device.mac_address)
+    get :finish, mac: @task.device.mac_address
+    assigns(:task).state.must_equal 'completed'
+  end
+  
 end
