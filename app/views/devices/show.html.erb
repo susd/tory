@@ -34,7 +34,7 @@
     <%= form_for @device do |f| %>
       <div class="field">
         <%= f.label :image_id %>
-        <%= f.select :image_id, @image_map %>
+        <%= f.select :image_id, @image_map, include_blank: 'none' %>
       </div>
       <div class="actions">
         <%= f.submit 'update', class: 'button' %>
