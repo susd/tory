@@ -43,7 +43,7 @@ class ActiveSupport::TestCase
   
   def stub_schedule_request(pxe, mac, job = 'deploy')
     req = {
-      body: {"image"=>"my-image-name", "mac_address"=>mac},
+      body: {"image"=>"my-image-file", "mac_address"=>mac},
       headers: request_headers.merge({ 'Content-Length'=>'59', 'Content-Type'=>'application/x-www-form-urlencoded'})
     }
     expected = {

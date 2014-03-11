@@ -15,7 +15,7 @@ describe RemoteTask do
   
   it 'schedules a job' do
     req = {
-      body: {"image"=>"my-image-name", "mac_address" => @device.mac_address},
+      body: {"image"=>"my-image-file", "mac_address" => @device.mac_address},
       headers: @request_headers.merge({ 'Content-Length'=>'59', 'Content-Type'=>'application/x-www-form-urlencoded'})
     }
     expected = @response_base.merge({ body: {message: 'active task'}.to_json })

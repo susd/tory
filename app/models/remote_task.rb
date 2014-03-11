@@ -28,7 +28,7 @@ class RemoteTask
     begin
       data = {
         mac_address: @device.mac_address,
-        image: @device.image.name
+        image: @device.image.file
       }
       resp = @resource[job].post data
       parse resp

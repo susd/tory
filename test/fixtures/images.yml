@@ -13,7 +13,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: my-image-name
+  name: My Image Name
   desc: MyText
   file: my-image-file
 
