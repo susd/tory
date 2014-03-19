@@ -11,25 +11,23 @@
   
 <div class="row">
   <div class="medium-3 columns">
-    
-    <% if @device.image.nil? %>
-    
     <div class="panel">
-      Associate an image with this device.
+      <%= form_for @device do |f| %>
+        <%= f.label :site_id do %>
+          Site
+          <%= f.select :site_id, @site_map, include_blank: 'none' %>
+        <% end %>
+        <%= f.label :image_id do %>
+          Image
+          <%= f.select :image_id, @image_map, include_blank: 'none' %>
+        <% end %>
+        <%= f.submit 'update', class: 'tiny button' %>
+      <% end %>
     </div>
     
-    <% elsif @device.active_task? %>
     
-    <div class="panel">
-      <p>Currently waiting for <%= @device.tasks.find_by(state: 'active').job %> to complete.</p>
-    </div>
     
-    <% else %>
-    
-    <%= render partial: 'create_task', locals: {device_id: @device.id, job: 'deploy'} %>
-    <%= render partial: 'create_task', locals: {device_id: @device.id, job: 'upload'} %>
-    
-    <% end %>
+
     
     
     <ul class="side-nav">
@@ -89,26 +87,31 @@
     </ul>
     
     
-    <%= form_for @device do |f| %>
-      <div class="row collapse">
-        <div class="medium-12 columns">
-          <h4>Change Image</h4>
-        </div>
-      </div>
-      <div class="row collapse">
-        <div class="medium-9 columns">
-          <%= f.select :image_id, @image_map, include_blank: 'none' %>
-        </div>
-        <div class="medium-3 columns">
-          <%= f.submit 'update', class: 'tiny button' %>
-        </div>
-      </div>
-    <% end %>
   </div>
   
   <div class="medium-3 columns">
     
-    <h3>Task history</h3>
+    <% if @device.image.nil? %>
+    
+    <div class="panel">
+      You must set the image for this device before
+      you can start a task.
+    </div>
+    
+    <% elsif @device.active_task? %>
+    
+    <div class="panel">
+      <p>Currently waiting for <%= @device.tasks.find_by(state: 'active').job %> to complete.</p>
+    </div>
+    
+    <% else %>
+    
+    <%= render partial: 'create_task', locals: {device_id: @device.id, job: 'deploy'} %>
+    <%= render partial: 'create_task', locals: {device_id: @device.id, job: 'upload'} %>
+    
+    <% end %>
+    
+    <h4>Task history</h4>
     
     <% if @tasks.any? %>
     

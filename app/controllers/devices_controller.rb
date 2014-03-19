@@ -12,6 +12,7 @@ class DevicesController < ApplicationController
   def show
     @tasks = @device.tasks.order(created_at: :desc)
     @image_map = Image.all.pluck(:name, :id)
+    @site_map = Site.all.pluck(:name, :id)
   end
 
   # GET /devices/new
