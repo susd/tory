@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :tasks, except: [:new, :edit] 
   get 'tasks/:mac/finish', to: 'tasks#finish', as: :finish_task
   
-  resources :sites, only: [:index, :edit, :update]
+  resources :sites
   
   root to: 'devices#index'
   

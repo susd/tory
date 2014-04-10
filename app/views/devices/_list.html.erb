@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="small-12 columns">
+    <table>
+      <thead>
+        <tr>
+          <th>Site</th>
+          <th>Make</th>
+          <th>Model</th>
+          <th>Serial</th>
+          <th>Mac Address</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% devices.each do |device| %>
+          <tr class="clickable" href="<%= device_path(device) %>">
+            <td><%= device.site.abbr.upcase %></td>
+            <td><%= device.make %></td>
+            <td><%= device.product %></td>
+            <td><%= device.serial %></td>
+            <td><%= device.mac_address %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

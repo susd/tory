@@ -1,15 +1,32 @@
 class SitesController < ApplicationController
-  before_action :load_site, except: :index
+  before_action :load_site, except: [:index, :new, :create]
   def index
     @sites = Site.all
+  end
+  
+  def show
+    @devices = @site.devices
+  end
+  
+  def new
+    @site = Site.new
   end
   
   def edit
   end
   
+  def create
+    @site = Site.new(site_params)
+    if @site.save
+      redirect_to sites_path, notice: 'Site created.'
+    else
+      render action: 'new'
+    end
+  end
+  
   def update
     if @site.update(site_params)
-      redirect_to sites_path, notice: 'Site was successfully updated.'
+      redirect_to sites_path, notice: 'Site updated.'
     else
       render action: 'edit'
     end
