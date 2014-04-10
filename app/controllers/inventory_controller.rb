@@ -17,7 +17,6 @@ class InventoryController < ApplicationController
     @device.site = Site.find_by(code: site_code_from_ip(inventory_params[:device][:ip_addr]))
     respond_to do |format|
       if @device.update(inventory_params[:device])
-        @device.extract_from_xml!
         format.json { render json: 'JSON success' }
         format.xml { render text: "Success\n" }
       else

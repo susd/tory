@@ -35,6 +35,8 @@ class Device < ActiveRecord::Base
   validates :mac_address, presence: true, uniqueness: true
   validates :site_id, presence: true
   
+  before_create :extract_from_xml!
+  
   def mac_address=(str)
     super(str.downcase.gsub(/\:/, ''))
   end
