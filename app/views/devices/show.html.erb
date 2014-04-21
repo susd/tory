@@ -79,12 +79,27 @@
     </table>
     
     
-    <h4>Memory Configuration</h4>
-    <ul>
-      <% @device.banks.each do |pos, bank| %>
-      <li><strong><%= bank['id'] %></strong> = <%= bank['size'] %></li>
-      <% end %>
-    </ul>
+    <h4>RAM</h4>
+    <table>
+      <tr>
+        <% @device.banks.size.times do |i| %>
+        <th><%= i %></th>
+        <% end %>
+      </tr>
+      <tr>
+        <% @device.banks.each do |pos, bank| %>
+        <td><%= bank['size'] || "empty" %></td>
+        <% end %>
+      </tr>
+    </table>
+    
+    <h4>Notes</h4>
+    <%= form_for @device do |f| %>
+      <div class="field">
+        <%= f.text_area :notes, placeholder: 'Notes' %>
+      </div>
+    <%= f.submit 'update notes', class: 'tiny button' %>
+    <% end %>
     
     
   </div>
