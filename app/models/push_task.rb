@@ -1,4 +1,4 @@
-class RemoteTask
+class PushTask
   attr_accessor :resource
   
   def initialize(device)
