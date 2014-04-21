@@ -37,13 +37,21 @@ class Device < ActiveRecord::Base
   
   before_create :extract_from_xml!
   
-  def mac_address=(str)
-    super(str.downcase.gsub(/\:/, ''))
+  concerning :MacAddressing do
+    def mac_address=(str)
+      super(str.downcase.gsub(/\:/, ''))
+    end
+  
+    def mac_address
+      super.scan(/\w{2}/).join(':').upcase if super
+    end
+  
+    def pxe_mac
+      "01-" << mac_address.scan(/\w{2}/).join('-').downcase
+    end
   end
   
-  def mac_address
-    super.scan(/\w{2}/).join(':').upcase if super
-  end
+  
   
   def active_task?
     !!tasks.where(state: 'active').any?
