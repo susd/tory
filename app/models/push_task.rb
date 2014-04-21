@@ -4,7 +4,6 @@ class PushTask
   def initialize(device)
     @device = device
     @site = device.site
-    @resource = RestClient::Resource.new("http://#{@site.pxe}")
   end
   
   def exists?
@@ -17,7 +16,7 @@ class PushTask
   
   def check
     result = nil
-    Net::SSH.start('10.5.1.65', 'root') do |ssh|
+    Net::SSH.start(device.site.pxe, 'root') do |ssh|
       result = ssh.exec!("ls /srv/tftpboot/pxelinux.cfg")
     end
     result
