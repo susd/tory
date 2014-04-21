@@ -16,6 +16,10 @@ class Task < ActiveRecord::Base
   validates :device_id, presence: true
   validate :device_has_image?
   
+  def self.active
+    where(state: 'active')
+  end
+  
   def device_has_image?
     errors.add(:base, 'Device has no image assigned.') unless device.has_image?
   end

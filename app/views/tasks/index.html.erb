@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="small-12 columns">
+    <h4>Active tasks</h4>
+    <ul>
+      <% @tasks.each do |task| %>
+      <li>
+        <%= link_to task.device.serial, task.device %><br>
+        <%= task.created_at.to_s(:short) %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
