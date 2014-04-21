@@ -2,6 +2,6 @@
 <ul class="side-nav">
   <li><%= link_to 'All', devices_path %></li>
   <% Site.all.each do |site| %>
-  <li><%= link_to site.abbr, site_path(site), options_for_link(site) %></li>
+  <li><%= link_to site.abbr.upcase, site_path(site), options_for_link(site) %></li>
   <% end %>
 </ul>
