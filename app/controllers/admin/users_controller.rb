@@ -15,8 +15,11 @@ class Admin::UsersController < AdminController
   
   def create
     @user = User.new(user_params)
-    flash[:notice] = 'User was successfully created.' if @user.save
-    respond_with @user
+    if @user.save
+      redirect_to admin_users_path, notice: 'User added.'
+    else
+      render action: :new
+    end
   end
   
   def update
