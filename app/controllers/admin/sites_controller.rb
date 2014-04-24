@@ -1,12 +1,7 @@
-class SitesController < ApplicationController
-  before_action :authenticate_user!
+class Admin::SitesController < AdminController
   before_action :load_site, except: [:index, :new, :create]
   def index
-    @sites = Site.all
-  end
-  
-  def show
-    @devices = @site.devices
+    @sites = Site.order(:code)
   end
   
   def new
@@ -19,7 +14,7 @@ class SitesController < ApplicationController
   def create
     @site = Site.new(site_params)
     if @site.save
-      redirect_to sites_path, notice: 'Site created.'
+      redirect_to admin_sites_path, notice: 'Site created.'
     else
       render action: 'new'
     end
@@ -27,7 +22,7 @@ class SitesController < ApplicationController
   
   def update
     if @site.update(site_params)
-      redirect_to sites_path, notice: 'Site updated.'
+      redirect_to admin_sites_path, notice: 'Site updated.'
     else
       render action: 'edit'
     end

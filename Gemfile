@@ -43,6 +43,8 @@ gem 'state_machine', github: 'hayesr/state_machine', branch: 'move_around_valida
 
 gem 'rest-client'
 
+gem 'devise'
+
 group :development do
   gem 'spring'
   gem 'capistrano-rails'

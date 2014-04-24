@@ -20,7 +20,20 @@
   
   <%= render 'layouts/nav' %>
 
-  <%= yield %>
+  <div class="content">
+    <div class="row">
+      <div class="medium-3 columns">
+        <ul class="side-nav">
+          <li><%= link_to 'Manage Sites', admin_sites_path %></li>
+          <li><%= link_to 'Manage Users', admin_users_path %></li>
+        </ul>
+      </div>
+      <div class="medium-9 columns">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+  
 
 </body>
 </html>
