@@ -1,6 +1,8 @@
 class DevicesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_device, except: [:index, :new, :create]
-
+  
+  
   # GET /devices
   # GET /devices.json
   def index

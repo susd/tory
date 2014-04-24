@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  before_action :authenticate_user!, except: :finish
+  
   def index
     @tasks = Task.active
   end

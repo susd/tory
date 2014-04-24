@@ -1,4 +1,5 @@
 class SitesController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_site, except: [:index, :new, :create]
   def index
     @sites = Site.all
