@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="large-12 columns">
+    <div class="fixed contain-to-grid">
+      <nav class="top-bar" data-topbar data-options="is_hover: false">
+        <ul class="title-area">
+          <li class="name">
+            <h1><a href="/">Tory</a></h1>
+          </li>
+          <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+        </ul>
+        <section class="top-bar-section">
+          <ul class="left">
+            <li><%= link_to 'Devices', devices_path %></li>
+            <li><%= link_to 'Tasks', tasks_path %></li>
+            <li><%= link_to 'Images', images_path %></li>
+            <li><%= link_to 'Admin', admin_sites_path %></li>
+          </ul>
+          
+          <ul class="right">
+            <li><%= link_to 'Sign-out', destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </section>
+      </nav>
+    </div>
+  </div>
+</div>

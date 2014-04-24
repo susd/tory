@@ -11,7 +11,13 @@ Rails.application.routes.draw do
   resources :tasks, except: [:new, :edit] 
   get 'tasks/:mac/finish', to: 'tasks#finish', as: :finish_task
   
-  resources :sites
+  resources :sites, only: [:show]
+  
+  namespace :admin do
+    resources :sites
+    resources :users
+  end
+  
   
   root to: 'devices#index'
   
