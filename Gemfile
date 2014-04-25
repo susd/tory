@@ -44,6 +44,8 @@ gem 'state_machine', github: 'hayesr/state_machine', branch: 'move_around_valida
 gem 'rest-client'
 
 gem 'devise'
+gem 'net-ssh'
+gem 'net-sftp'
 
 group :development do
   gem 'spring'

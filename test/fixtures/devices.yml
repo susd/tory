@@ -37,6 +37,7 @@ one:
   site: one
   state: active
   image: one
+  notes: Lorem ipsum dolor sit amet
 
 two:
   cpu: MyString
@@ -49,8 +50,10 @@ two:
   mac_address: '020304050607'
   cpu_speed: 1
   site: two
+  notes: Lorem ipsum dolor sit amet
   
 three:
   mac_address: aa30b3cc728f
   site: one
   image: one
+  notes: Lorem ipsum dolor sit amet
