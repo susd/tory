@@ -8,7 +8,7 @@ class PushTask
     @device = device
     @site = device.site
     @pxe = @site.pxe
-    @user = 'root'
+    @user = 'pxe'
     @path = "/srv/tftpboot/pxelinux.cfg/#{@device.pxe_mac}"
     
     @app = 'tory.saugususd.org'
