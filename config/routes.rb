@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   end
   
   resources :push_tasks, only: [:create, :destroy]
-  get 'push_tasks/:mac/finish', to: 'tasks#finish', as: :finish_push_task
+  get 'push_tasks/:mac/finish', to: 'push_tasks#finish', as: :finish_push_task
   
   root to: 'devices#index'
   
