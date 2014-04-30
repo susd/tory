@@ -1,13 +1,17 @@
 <div class="row">
   <div class="small-12 columns">
     <h4>Active tasks</h4>
-    <ul>
+    
+    <table>
       <% @tasks.each do |task| %>
-      <li>
-        <%= link_to task.device.serial, task.device %><br>
-        <%= task.created_at.to_s(:short) %>
-      </li>
+      <tr>
+        <td><%= link_to task.device.serial, task.device %></td>
+        <td><%= task.created_at.to_s(:short) %></td>
+        <td><%= link_to 'Cancel', push_task_path(task), method: :destroy %></td>
+        <td><%= link_to 'Finish', finish_push_task_path(mac: task.device.mac_address) %></td>
+      </tr>
       <% end %>
-    </ul>
+    </table>
+    
   </div>
 </div>
