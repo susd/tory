@@ -6,7 +6,7 @@ class SitesController < ApplicationController
   end
   
   def show
-    @devices = @site.devices
+    @devices = @site.devices.order(created_at: :desc)
   end
   
   def new
