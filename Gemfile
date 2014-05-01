@@ -47,6 +47,8 @@ gem 'devise'
 gem 'net-ssh'
 gem 'net-sftp'
 
+gem 'font-awesome-sass'
+
 group :development do
   gem 'spring'
   gem 'capistrano-rails'

@@ -96,6 +96,8 @@ GEM
     erubis (2.7.0)
     execjs (2.0.2)
     ffi (1.9.3)
+    font-awesome-sass (4.0.3.1)
+      sass (~> 3.2)
     formatador (0.2.4)
     foundation-rails (5.1.1.0)
       railties (>= 3.1.0)
@@ -246,6 +248,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.0.0)
   devise
+  font-awesome-sass
   foundation-rails
   guard-minitest
   jbuilder (~> 1.2)
