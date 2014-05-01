@@ -51,7 +51,7 @@ class PushTask
     Net::SSH.start(@pxe, @user) do |ssh|
       result = ssh.exec!("rm /srv/tftpboot/pxelinux.cfg/#{@device.pxe_mac}")
     end
-    if result.nil?
+    if result.blank?
       return true
     else
       return false
@@ -91,7 +91,7 @@ class PushTask
     args << " ocs_live_batch=yes vga=788 ip=frommedia nosplash i915.blacklist=yes radeonhd.blacklist=yes nouveau.blacklist=yes vmwgfx.blacklist=yes"
     args << %Q{ fetch=tftp://#{@site.storage}/zilla/live/filesystem.squashfs}
     args << %Q{ ocs_prerun="mount -t nfs #{@site.storage}:/images/dev /home/partimag"}
-    args << %Q{ ocs_postrun="wget http://#{@app}/tasks/#{@device.attributes['mac_address']}/finish" ocs_postrun1="sudo reboot"}
+    args << %Q{ ocs_postrun="wget http://#{@app}/push_tasks/#{@device.attributes['mac_address']}/finish" ocs_postrun1="sudo shutdown"}
   end
 
 end
