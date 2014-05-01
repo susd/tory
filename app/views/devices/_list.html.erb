@@ -8,6 +8,7 @@
           <th>Serial</th>
           <th>Notes</th>
           <th>Mac Address</th>
+          <th>Image?</th>
         </tr>
       </thead>
 
@@ -19,6 +20,11 @@
             <td><%= device.serial %></td>
             <td><%= device.notes.try(:truncate, 30) %></td>
             <td><%= device.mac_address %></td>
+            <td>
+              <% if device.image_id.present? %>
+              <i class="fa fa-check-circle"></i>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>
