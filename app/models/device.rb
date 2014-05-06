@@ -82,10 +82,4 @@ class Device < ActiveRecord::Base
     end
   end
   
-  private
-  
-  def bytes_to_giga(bytes)
-    "#{bytes.to_f / (2**30)} GB"
-  end
-  
 end
