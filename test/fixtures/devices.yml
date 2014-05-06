@@ -20,6 +20,7 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  state       :string(255)
+#  notes       :text
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
