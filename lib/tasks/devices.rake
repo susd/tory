@@ -1,5 +1,19 @@
 require 'csv'
 
+namespace :devices do
+  
+  task filerename: :environment do
+    path = Rails.root.join( 'public', 'uploads', 'device' )
+    ['html', 'xml'].each do |type|
+      Dir["#{path}/#{type}file/*"].each do |dir|
+        name = File.basename(Dir["#{dir}/*"].first, ".#{type}")
+        File.rename(dir, "#{path}/#{type}file/#{name}")
+      end
+    end
+  end
+  
+end
+
 namespace :export do
   
   desc 'Export devices'
@@ -13,6 +27,23 @@ namespace :export do
         row = device.attributes.values
         row.unshift device.site.abbr
         csv << row
+        count += 1
+      end
+    end
+    puts count
+  end
+  
+end
+
+namespace :import do
+  
+  desc 'Import devices'
+  task devices: :environment do
+    count = 0
+    CSV.foreach('tmp/devices.csv', headers: true) do |row|
+      row.delete('site')
+      row.delete('id')
+      if Device.create(row.to_hash)
         count += 1
       end
     end
