@@ -6,7 +6,12 @@ class DevicesController < ApplicationController
   # GET /devices
   # GET /devices.json
   def index
-    @devices = Device.order(created_at: :desc)
+    if params[:site_id].present?
+      @site = Site.find(params[:site_id])
+      @devices = @site.devices.order(created_at: :desc)
+    else
+      @devices = Device.order(created_at: :desc)
+    end
   end
 
   # GET /devices/1
