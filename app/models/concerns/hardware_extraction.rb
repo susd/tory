@@ -78,6 +78,10 @@ module HardwareExtraction
   private
   
   def bytes_to_giga(bytes)
+    bytes.to_f / (2**30)
+  end
+  
+  def bytes_to_human(bytes)
     "#{bytes.to_f / (2**30)} GB"
   end
 end
