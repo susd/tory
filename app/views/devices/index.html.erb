@@ -7,7 +7,6 @@
     <% end %>
     
     <h4 class="subheader"><%= @device_count %> Total</h4>
-    <p><%= link_to 'Download CSV', params.merge(format: :csv) %></p>
   </div>
 </div>
 
@@ -18,10 +17,15 @@
     
     <%= render partial: 'list', locals: { devices: @devices } %>
     
-    <%= paginate @devices %>
+    <div class="row">
+      <div class="small-12 columns">
+        <%= paginate @devices %>
+      </div>
+    </div>
     
   </div>
   <div class="medium-2 columns">
+    <p><%= link_to 'Download CSV', params.merge(format: :csv) %></p>
     <%= render 'sites/nav' %>
   </div>
 </div>
