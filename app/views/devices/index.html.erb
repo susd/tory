@@ -7,6 +7,7 @@
     <% end %>
     
     <h4 class="subheader"><%= pluralize(@devices.size, 'Device') %></h4>
+    <p><%= link_to 'Download CSV', params.merge(format: :csv) %></p>
   </div>
 </div>
 

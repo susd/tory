@@ -35,7 +35,11 @@ module HardwareExtraction
       pos = bank.attr('id').gsub(/\D/, '')
       bytes = bank.css('size').text.to_i
       if bytes > 0
-        banks[pos] = { id: bank.attr('id'), size: bytes_to_giga(bytes) }
+        banks[pos] = { 
+          id: bank.attr('id'), 
+          size: bytes_to_giga(bytes), 
+          desc: bank.children.detect{|c| c.name == 'description'}.text
+        }
       else
         banks[pos] = 'empty'
       end

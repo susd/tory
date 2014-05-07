@@ -12,6 +12,11 @@ class DevicesController < ApplicationController
     else
       @devices = Device.order(created_at: :desc)
     end
+    
+    respond_to do |format|
+      format.html
+      format.csv { send_data(@devices.to_csv, filename: "devices_#{Time.now.to_s(:number)}.csv") }
+    end
   end
 
   # GET /devices/1

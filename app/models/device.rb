@@ -38,6 +38,28 @@ class Device < ActiveRecord::Base
   validates :mac_address, presence: true, uniqueness: true
   validates :site_id, presence: true
   
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << ['Site','Serial','Model','CPU','Speed','RAM Total','RAM Type','Bank0','Bank1','Bank2','Bank3']
+      order(:product).includes(:site).each do |device|
+        row = [device.site.name]
+        row += device.attributes.values_at('serial','product','cpu','cpu_speed','ram')
+        row << device.banks['0']['desc']
+        4.times do |i|
+          # row << device.banks[i.to_s]['size'] unless device.banks[i.to_s].nil?
+          unless device.banks[i.to_s].nil?
+            if device.banks[i.to_s] == "empty"
+              row << "empty"
+            else
+              row << device.banks[i.to_s]['size']
+            end
+          end
+        end
+        csv << row
+      end
+    end
+  end
+  
   def active_task?
     !!tasks.where(state: 'active').any?
   end
