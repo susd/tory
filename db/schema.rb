@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140423230943) do
+ActiveRecord::Schema.define(version: 20140506221438) do
 
   create_table "devices", force: true do |t|
     t.integer  "site_id"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20140423230943) do
     t.string   "htmlfile"
     t.string   "xmlfile"
     t.string   "cpu"
-    t.string   "ram"
+    t.string   "ram_str"
     t.string   "make"
     t.string   "product"
     t.string   "serial"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140423230943) do
     t.datetime "updated_at"
     t.string   "state"
     t.text     "notes"
+    t.float    "ram"
   end
 
   add_index "devices", ["image_id"], name: "index_devices_on_image_id"

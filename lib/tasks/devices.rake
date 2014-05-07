@@ -12,6 +12,32 @@ namespace :devices do
     end
   end
   
+  task relink_files: :environment do
+    path = Rails.root.join('public', 'uploads', 'old_device')
+    
+    ['html', 'xml'].each do |type|
+      count = 0
+      Device.where("#{type}file" => nil).each do |device|
+        mac = device.attributes['mac_address']
+        src_path = "#{path}/#{type}file/#{mac}/#{mac}.#{type}"
+        if File.exists? src_path
+          src_file = File.new(src_path)
+          if device.update("#{type}file" => src_file)
+            count += 1
+          end
+        end
+      end
+      puts "#{type} #{count}"
+    end
+  end
+  
+  task reextract: :environment do
+    Device.all.each do |device|
+      device.extract_from_xml!
+      device.save
+    end
+  end
+  
 end
 
 namespace :export do
