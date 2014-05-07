@@ -8,9 +8,11 @@ class DevicesController < ApplicationController
   def index
     if params[:site_id].present?
       @site = Site.find(params[:site_id])
-      @devices = @site.devices.order(created_at: :desc)
+      @device_count = @site.devices.count
+      @devices = @site.devices.order(created_at: :desc).page(params[:page]).per(50)
     else
-      @devices = Device.order(created_at: :desc)
+      @device_count = Device.count
+      @devices = Device.order(created_at: :desc).page(params[:page]).per(50)
     end
     
     respond_to do |format|

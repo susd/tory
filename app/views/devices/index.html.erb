@@ -6,7 +6,7 @@
     <h2>All devices</h2>
     <% end %>
     
-    <h4 class="subheader"><%= pluralize(@devices.size, 'Device') %></h4>
+    <h4 class="subheader"><%= @device_count %> Total</h4>
     <p><%= link_to 'Download CSV', params.merge(format: :csv) %></p>
   </div>
 </div>
@@ -17,6 +17,8 @@
   <div class="medium-10 columns">
     
     <%= render partial: 'list', locals: { devices: @devices } %>
+    
+    <%= paginate @devices %>
     
   </div>
   <div class="medium-2 columns">

@@ -49,6 +49,8 @@ gem 'net-sftp'
 
 gem 'font-awesome-sass'
 
+gem 'kaminari'
+
 group :development do
   gem 'spring'
   gem 'capistrano-rails'
