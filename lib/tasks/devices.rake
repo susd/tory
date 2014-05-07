@@ -17,7 +17,7 @@ namespace :devices do
     
     ['html', 'xml'].each do |type|
       count = 0
-      Device.where("#{type}file" => nil).each do |device|
+      Device.all.each do |device|
         mac = device.attributes['mac_address']
         src_path = "#{path}/#{type}file/#{mac}/#{mac}.#{type}"
         if File.exists? src_path
