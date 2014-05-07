@@ -33,8 +33,10 @@ namespace :devices do
   
   task reextract: :environment do
     Device.all.each do |device|
-      device.extract_from_xml!
-      device.save
+      if device.xmlfile.present?
+        device.extract_from_xml!
+        device.save
+      end
     end
   end
   
