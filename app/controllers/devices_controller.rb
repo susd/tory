@@ -17,7 +17,7 @@ class DevicesController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.csv { send_data(@devices.to_csv, filename: "devices_#{Time.now.to_s(:number)}.csv") }
+      format.csv { send_data(@devices.to_csv, filename: csv_filename) }
     end
   end
 
@@ -94,5 +94,13 @@ class DevicesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def device_params
     params.require(:device).permit(:mac_address, :site_id, :image_id, :xmlfile, :htmlfile, :notes)
+  end
+  
+  def csv_filename
+    name = "devices"
+    name << "_#{@site.abbr.downcase}" if @site.present?
+    name << "_#{Time.now.to_s(:number)}"
+    name << ".csv"
+    name
   end
 end
