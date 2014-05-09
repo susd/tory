@@ -2,7 +2,7 @@
   <div class="large-12 columns">
     <h3><%= @device.best_name %></h3>
     <div class="meta">
-      <%= link_to @device.site.name, @device.site %> | 
+      <%= link_to @device.site.name, site_devices_path(@device.site) %> | 
       <%= @device.created_at.strftime('%b %e, %Y %l:%m%p ') %>
     </div>
     <hr>
