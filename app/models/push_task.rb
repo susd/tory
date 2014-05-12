@@ -31,7 +31,7 @@ class PushTask
   end
   
   def schedule(job)
-    if job == :upload
+    if job == 'upload'
       data = upload_template
     else
       data = deploy_template
