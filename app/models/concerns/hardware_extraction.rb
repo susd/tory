@@ -63,8 +63,12 @@ module HardwareExtraction
 
   def extract_uuid!
     load_xml
-    unless @doc.css('setting#uuid').nil?
+    begin
       self.uuid = @doc.css('setting#uuid').attr('value').text
+    rescue NoMethodError
+      #            80246D3A-0769-1110-8556-B8953E63B29E
+      # self.uuid = '00000000-0000-0000-0000-000000000000'
+      self.uuid = nil
     end
   end
 
