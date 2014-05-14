@@ -63,7 +63,9 @@ module HardwareExtraction
 
   def extract_uuid!
     load_xml
-    self.uuid = @doc.css('setting#uuid').attr('value').text
+    unless @doc.css('setting#uuid').nil?
+      self.uuid = @doc.css('setting#uuid').attr('value').text
+    end
   end
 
   def extract_from_xml!
