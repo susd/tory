@@ -7,6 +7,7 @@ class SitesController < ApplicationController
   
   def show
     @devices = @site.devices.order(created_at: :desc).limit(5)
+    @product_counts = @site.devices.group(:product).order('count_product desc').count(:product)
   end
   
   def new
