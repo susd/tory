@@ -1,11 +1,14 @@
 class Admin::SitesController < AdminController
   before_action :load_site, except: [:index, :new, :create]
   def index
-    @sites = Site.order(:code)
+    @sites = Site.order(:code).includes(:servers)
   end
   
   def new
     @site = Site.new
+  end
+  
+  def show
   end
   
   def edit

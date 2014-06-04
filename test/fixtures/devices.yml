@@ -8,7 +8,7 @@
 #  htmlfile    :string(255)
 #  xmlfile     :string(255)
 #  cpu         :string(255)
-#  ram         :string(255)
+#  ram_str     :string(255)
 #  make        :string(255)
 #  product     :string(255)
 #  serial      :string(255)
@@ -21,6 +21,7 @@
 #  updated_at  :datetime
 #  state       :string(255)
 #  notes       :text
+#  ram         :float
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

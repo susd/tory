@@ -14,4 +14,29 @@
 
 class Site < ActiveRecord::Base
   has_many :devices
+  has_many :servers
+  
+  def storage_servers
+    servers.where(role: 0)
+  end
+  
+  def pxe_servers
+    servers.where(role: 1)
+  end
+  
+  def next_storage
+    nxt = storage_servers.order(:used_at).first
+    if nxt.nil?
+      storage
+    else
+      nxt.touch(:used_at)
+      nxt
+    end
+  end
 end
+
+# def next_server(site)
+#   nxt = site.storage_servers.order(:used_at).first
+#   nxt.update(used_at: Time.now)
+#   nxt
+# end
