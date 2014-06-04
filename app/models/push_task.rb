@@ -87,12 +87,14 @@ class PushTask
   end
   
   def common_args
+    storage_server = @site.next_storage.ip_addr
     args = "  append initrd=zilla/live/initrd.img boot=live config noswap edd=on nomodeset noprompt nolocales keyboard-layouts=NONE"
     args << " ocs_live_batch=yes vga=788 ip=frommedia nosplash i915.blacklist=yes radeonhd.blacklist=yes nouveau.blacklist=yes vmwgfx.blacklist=yes"
-    args << %Q{ fetch=tftp://#{@site.storage}/zilla/live/filesystem.squashfs}
-    args << %Q{ ocs_prerun="mount -t nfs #{@site.storage}:/images/dev /home/partimag"}
+    args << %Q{ fetch=tftp://#{storage_server}/zilla/live/filesystem.squashfs}
+    args << %Q{ ocs_prerun="mount -t nfs #{storage_server}:/images/dev /home/partimag"}
     args << %Q{ ocs_postrun="wget http://#{@app}/push_tasks/#{@device.attributes['mac_address']}/finish" ocs_postrun1="sudo poweroff"}
   end
+  
 
 end
 

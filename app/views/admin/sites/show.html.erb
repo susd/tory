@@ -1,0 +1,13 @@
+<h3><%= @site.name %></h3>
+
+<h5>Servers</h5>
+
+<table>
+  <% @site.servers.each do |server| %>
+    <tr>
+      <td><%= server.ip_addr %></td>
+      <td><%= server.role %></td>
+      <td><%= link_to 'Edit', edit_admin_site_server_path(@site, server) %></td>
+    </tr>
+  <% end %>
+</table>

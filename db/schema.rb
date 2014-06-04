@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506221438) do
+ActiveRecord::Schema.define(version: 20140529180730) do
 
   create_table "devices", force: true do |t|
     t.integer  "site_id"
@@ -45,6 +45,17 @@ ActiveRecord::Schema.define(version: 20140506221438) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "servers", force: true do |t|
+    t.integer  "site_id"
+    t.string   "ip_addr"
+    t.integer  "role",       default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "used_at"
+  end
+
+  add_index "servers", ["site_id"], name: "index_servers_on_site_id"
 
   create_table "sites", force: true do |t|
     t.string   "name"

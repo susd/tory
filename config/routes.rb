@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   devise_for :users
   resources :images
 
@@ -16,7 +17,9 @@ Rails.application.routes.draw do
   end
   
   namespace :admin do
-    resources :sites
+    resources :sites do
+      resources :servers
+    end
     resources :users
   end
   
