@@ -66,7 +66,7 @@ class Device < ActiveRecord::Base
   end
   
   def product
-    super || ""
+    super || "unknown"
   end
   
   #TODO: Best name that falls back to dev-{device_id}

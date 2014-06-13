@@ -18,7 +18,7 @@
           <tr class="clickable" href="<%= device_path(device) %>">
             <td><%= device.site.abbr.upcase %></td>
             <td><%= device.product.truncate(20) %></td>
-            <td><%= device.serial %></td>
+            <td><%= device.best_name %></td>
             <td><%= device.notes.try(:truncate, 30) %></td>
             <td><%= device.mac_address %></td>
             <td>
