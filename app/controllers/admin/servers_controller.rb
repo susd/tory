@@ -25,7 +25,7 @@ class Admin::ServersController < AdminController
   # POST /servers
   # POST /servers.json
   def create
-    @server = @site.servers.new(server_params)
+    @server = @site.servers.new(server_params.merge({used_at: (Time.now - 1.day)}))
 
     respond_to do |format|
       if @server.save
