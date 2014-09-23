@@ -22,6 +22,7 @@ config/deploy.rb
 config/deploy
 config/nginx*
 config/*.service
+config/puma
 
 lib/client
 
