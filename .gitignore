@@ -21,6 +21,7 @@ config/database.yml
 config/deploy.rb
 config/deploy
 config/nginx*
+config/*.service
 
 lib/client
 
