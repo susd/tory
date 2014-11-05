@@ -34,7 +34,7 @@ class Device < ActiveRecord::Base
   
   belongs_to :site
   belongs_to :image
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
   
   validates :mac_address, presence: true, uniqueness: true
   validates :site_id, presence: true
