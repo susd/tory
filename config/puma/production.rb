@@ -1,5 +1,5 @@
 app = 'tory'
-bind "unix:///tmp/#{app}_puma.sock"
+bind "unix:///srv/rails/#{app}/current/tmp/sockets/puma.sock"
 pidfile "/srv/rails/#{app}/current/tmp/pids/puma"
 state_path "/srv/rails/#{app}/current/tmp/puma_state"
 environment 'production'
