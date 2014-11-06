@@ -41,14 +41,14 @@ class DeviceTest < ActiveSupport::TestCase
       
       it "extracts the ram size" do
         @device.extract_ram!
-        @device.ram.must_equal "2.0 GB"
+        @device.ram.must_equal 2.0
       end
       
       it "extracts the memory bank information" do
         @device.extract_banks!
         @device.save
         @device.reload
-        @device.banks.must_equal({'0' => {'id' => 'bank:0', 'size' => '2.0 GB'}, '1' => 'empty' })
+        @device.banks.must_equal({'0' => {'id' => 'bank:0', 'size' => 2.0, "desc"=>"SODIMM DDR3 Synchronous 1333 MHz (0.8 ns)"}, '1' => 'empty' })
       end
       
       it "extracts the make" do

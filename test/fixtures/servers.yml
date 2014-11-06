@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  site_id: 
+  site: one
   ip_addr: MyString
   role: 1
 
 two:
-  site_id: 
+  site: one
   ip_addr: MyString
   role: 1
