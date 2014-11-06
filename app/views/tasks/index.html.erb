@@ -7,8 +7,8 @@
       <tr>
         <td><%= link_to task.device.serial, task.device %></td>
         <td><%= task.created_at.to_s(:short) %></td>
-        <td><%= link_to 'Cancel', push_task_path(task), method: :destroy %></td>
-        <td><%= link_to 'Finish', finish_push_task_path(mac: task.device.mac_address) %></td>
+        <td><%= link_to 'Cancel', task_path(task), method: :destroy %></td>
+        <td><%= link_to 'Finish', finish_task_path(mac: task.device.mac_address) %></td>
       </tr>
       <% end %>
     </table>
