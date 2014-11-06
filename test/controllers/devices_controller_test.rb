@@ -4,6 +4,8 @@ class DevicesControllerTest < ActionController::TestCase
   setup do
     @device = devices(:one)
     @device.site = sites(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do

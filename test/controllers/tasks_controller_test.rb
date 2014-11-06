@@ -4,6 +4,8 @@ describe TasksController do
   before do
     @task = tasks(:deploy)
     @site = Site.last
+    @user = users(:one)
+    sign_in @user
   end
   
   it 'gets the index' do

@@ -103,33 +103,21 @@
     
     <% if @device.image.nil? %>
     
-    <div class="panel">
-      You must set the image for this device before
-      you can start a task.
-    </div>
+      <div class="panel">
+        You must set the image for this device before
+        you can start a task.
+      </div>
     
     <% elsif @device.active_task? %>
     
-    <div class="panel">
-      <p>Currently waiting for <%= @device.tasks.find_by(state: 'active').job %> to complete.</p>
-    </div>
+      <div class="panel">
+        <p>Currently waiting for <%= @device.tasks.find_by(state: 'active').job %> to complete.</p>
+      </div>
     
     <% else %>
     
-    <%# render partial: 'create_task', locals: {device_id: @device.id, job: 'deploy'} %>
-    <%# render partial: 'create_task', locals: {device_id: @device.id, job: 'upload'} %>
-    
-      <%= form_for Task.new, url: push_tasks_path do |f| %>
-        <%= f.hidden_field :device_id, {value: @device.id} %>
-        <%= f.hidden_field :job, {value: 'deploy'} %>
-        <%= f.submit 'Deploy', class: 'expand button' %>
-      <% end %>
-      
-      <%= form_for Task.new, url: push_tasks_path do |f| %>
-        <%= f.hidden_field :device_id, {value: @device.id} %>
-        <%= f.hidden_field :job, {value: 'upload'} %>
-        <%= f.submit 'Upload', class: 'expand button' %>
-      <% end %>
+      <%= render partial: 'create_task', locals: {device_id: @device.id, job: 'deploy'} %>
+      <%= render partial: 'create_task', locals: {device_id: @device.id, job: 'upload'} %>
     
     <% end %>
     
@@ -145,8 +133,7 @@
         <span class="task-state task-<%= task.state %>"><%= task.state %></span>
         <% if task.active? %>
         <span class="task-cancel">
-          <%# link_to_cancel(task) %>
-          <%= link_to 'Cancel', push_task_path(task), {method: :delete, confirm: 'Cancel this task?', class: 'tiny alert button'} %>
+          <%= link_to_cancel(task) %>
         </span>
         <% end %>
       </li>

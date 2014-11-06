@@ -3,10 +3,9 @@
 <table>
   <thead>
     <tr>
-      <th>Site</th>
-      <th>Ip addr</th>
       <th>Role</th>
-      <th colspan="3"></th>
+      <th>Ip addr</th>
+      <th colspan="2">Ops</th>
     </tr>
   </thead>
 
@@ -15,7 +14,6 @@
       <tr>
         <td><%= server.role %></td>
         <td><%= server.ip_addr %></td>
-        <td><%= link_to 'Show', [:admin, @site, server] %></td>
         <td><%= link_to 'Edit', edit_admin_site_server_path(@site, server) %></td>
         <td><%= link_to 'Destroy', [:admin, @site, server], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

@@ -64,3 +64,7 @@ class ActiveSupport::TestCase
       with(headers: request_headers).to_return(expected)
   end
 end
+
+class ActionController::TestCase
+  include Devise::TestHelpers
+end
