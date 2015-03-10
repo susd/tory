@@ -17,7 +17,13 @@ class DevicesController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.csv { send_data(@devices.to_csv, filename: csv_filename) }
+      format.csv do
+        if @site
+          send_data(@site.devices.to_csv, filename: csv_filename)
+        else
+          send_data(Device.to_csv, filename: csv_filename)
+        end
+      end
     end
   end
 

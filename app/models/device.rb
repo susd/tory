@@ -45,7 +45,7 @@ class Device < ActiveRecord::Base
       order(:product).includes(:site).each do |device|
         row = [device.site.name]
         row += device.attributes.values_at('serial','product','cpu','cpu_speed','ram')
-        row << device.banks['0']['desc']
+        row << device.fetch_banks(['0','desc'])
         4.times do |i|
           # row << device.banks[i.to_s]['size'] unless device.banks[i.to_s].nil?
           unless device.banks[i.to_s].nil?
@@ -97,6 +97,11 @@ class Device < ActiveRecord::Base
   
   def has_image?
     image_id.present?
+  end
+  
+  # guards against nils
+  def fetch_banks(keys = [])
+    keys.inject(self.banks){|banks, key| banks && banks[key] }
   end
   
   state_machine :state, initial: :active do
